@@ -173,10 +173,15 @@ export default function CrudPorx() {
         data.id = Date.now();
         setDb([...db,data])
     }
+      const updateData = (data) => {
+        let newData = db.map((el) => (el.id === data.id ? data : el));
+        setDb(newData);
+      };
     
     const deleteData = (id) => {
+
       let isDelete = confirm(
-        `¿estas seguro de eliminar eñl registro con el id id`
+        `¿estas seguro de eliminar el registro con el id id`
       );
   
       if (isDelete) {
@@ -187,12 +192,12 @@ export default function CrudPorx() {
     };
   
   return (
-    <>
-    <h1>Marina</h1>
-    <CrudForm  editToData={editToData} setEditToData={setEditToData} createData={createData}/>
+    <div className='wrapper'>
+    <h1>Marine</h1>
+    <CrudForm  editToData={editToData} setEditToData={setEditToData} createData={createData} updateData={updateData}/>
     <ul className='list-container'>
     <CrudRender setEditToData={setEditToData} deleteData={deleteData} data={db}/>
     </ul>
-    </>
+    </div>
     )
 }
